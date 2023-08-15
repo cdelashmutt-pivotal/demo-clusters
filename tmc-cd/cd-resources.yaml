@@ -1,0 +1,70 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tanzu-continuousdelivery-resources
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tanzu-cd
+  namespace: tanzu-continuousdelivery-resources
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tanzu-cd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: tanzu-cd
+  namespace: tanzu-continuousdelivery-resources
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: tanzu-cd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: tanzu-cd
+  namespace: tanzu-continuousdelivery-resources
+---
+apiVersion: kappctrl.k14s.io/v1alpha1
+kind: App
+metadata:
+  name: tmc-cd-bootstrap
+  namespace: tanzu-continuousdelivery-resources
+spec:
+  serviceAccountName: tanzu-cd
+  fetch:
+  - inline:
+      paths:
+        cluster-app.yaml: |
+          #@ load("@ytt:data", "data")
+          ---
+          apiVersion: kappctrl.k14s.io/v1alpha1
+          kind: App
+          metadata:
+            name: tmc-cd
+            namespace: tanzu-continuousdelivery-resources
+          spec:
+            serviceAccountName: tanzu-cd
+            fetch:
+            - git:
+                url: #@ "https://github.com/cdelashmutt-pivotal/demo-clusters/clusters/" + data.values.cluster_name
+                ref: origin/main
+                lfsSkipSmudge: true
+  template:
+  - ytt:
+      valuesFrom:
+      - secretRef: 
+          name: cluster-name-secret
+  deploy:
+  - kapp: {}
