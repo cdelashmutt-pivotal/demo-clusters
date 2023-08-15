@@ -45,7 +45,8 @@ spec:
             serviceAccountName: tanzu-cd
             fetch:
             - git:
-                url: #@ "https://github.com/cdelashmutt-pivotal/demo-clusters/clusters/" + data.values.cluster_name
+                url: https://github.com/cdelashmutt-pivotal/demo-clusters
+                subPath: #@ "/clusters/" + data.values.cluster_name
                 ref: origin/main
                 lfsSkipSmudge: true
   template:
