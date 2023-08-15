@@ -20,23 +20,24 @@ EOF
 )
 ```
 
-Next, enable the continuous delivery feature for your cluster group pointing to your cloned repo URL.
+Next, enable the continuous delivery feature for your cluster group pointing to your cloned repo URL (modifying the exports on the first line to match your setup).
 ```console
-$ export CLUSTER_GROUP=my-clusters && tanzu tmc continuousdelivery enable -s clustergroup -g $CLUSTER_GROUP &&
-tanzu tmc continuousdelivery gitrepository create -s clustergroup -v <(<< EOF
-ClusterGroupName: $CLUSTER_GROUP
-Name: tmc-cd
-Description: TMC CD based on Cluster Name
-Url: https://github.com/cdelashmutt-pivotal/demo-clusters
-Branch: origin/main
+$ export CLUSTER_GROUP=my-clusters GITOPS_URL=https://github.com/cdelashmutt-pivotal/demo-clusters && 
+tanzu tmc continuousdelivery enable -s clustergroup -g $CLUSTER_GROUP &&
+tanzu tmc continuousdelivery gitrepository create -s clustergroup -v <(<<- EOF
+  ClusterGroupName: $CLUSTER_GROUP
+  Name: tmc-cd
+  Description: TMC CD based on Cluster Name
+  Url: $GITOPS_URL
+  Branch: origin/main
 EOF
 ) &&
-tanzu tmc continuousdelivery kustomization create -s clustergroup -v <(<< EOF
-ClusterGroupName: $CLUSTER_GROUP
-Name: tmc-cd
-Description: TMC CD based on Cluster Name
-SourceName: tmc-cd
-Path: tmc-cd
+tanzu tmc continuousdelivery kustomization create -s clustergroup -v <(<<- EOF
+  ClusterGroupName: $CLUSTER_GROUP
+  Name: tmc-cd
+  Description: TMC CD based on Cluster Name
+  SourceName: tmc-cd
+  Path: tmc-cd
 EOF
 )
 ```
