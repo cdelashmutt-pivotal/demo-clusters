@@ -49,6 +49,11 @@ spec:
                 subPath: #@ "/clusters/" + data.values.cluster_name
                 ref: origin/main
                 lfsSkipSmudge: true
+            template:
+            - ytt: {}
+            - kbld: {}
+            deploy:
+            - kapp: {}
   template:
   - ytt:
       valuesFrom:
