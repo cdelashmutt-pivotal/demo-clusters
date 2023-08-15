@@ -2,7 +2,7 @@ apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageRepository
 metadata:
   name: roles.grogscave.net
-  namespace: my-ns
+  namespace: tanzu-continuousdelivery-resources
 spec:
   fetch:
     git:
