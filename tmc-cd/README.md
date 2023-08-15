@@ -1,0 +1,1 @@
+This directory contains resources needed to create the cluster specific App object for the cluster.  Each cluster provisioned or attached in TMC has a name, and these resources use this name to define an App that references the folder under the "clusters" path of this repo that has the same name as the name of the cluster as assigned in TMC.
