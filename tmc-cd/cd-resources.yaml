@@ -23,19 +23,6 @@ subjects:
   name: tanzu-cd
   namespace: tanzu-continuousdelivery-resources
 ---
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: tanzu-cd
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-- kind: ServiceAccount
-  name: tanzu-cd
-  namespace: tanzu-continuousdelivery-resources
----
 apiVersion: kappctrl.k14s.io/v1alpha1
 kind: App
 metadata:
