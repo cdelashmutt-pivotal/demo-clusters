@@ -1,0 +1,11 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'Merge pull request #3626 from nitrocode/libssl-bump...'
+      sha: 1f6340a95c0f5a96cc5888196eb767943f96bea4
+      tags:
+      - v0.13.5
+    path: upstream
+  path: packages/external-dns
+kind: LockConfig

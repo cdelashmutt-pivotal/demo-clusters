@@ -1,0 +1,15 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+- path: packages/external-dns
+  contents:
+  - path: upstream
+    git:
+      url: https://github.com/kubernetes-sigs/external-dns
+      ref: v0.13.5
+      depth: 1
+    includePaths:
+    - kustomize/*.yaml
+    excludePaths:
+    - kustomize/kustomization.yaml
+    newRootPath: kustomize

@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - cluster-name-secret.yaml
 - cd-resources.yaml
+- repo.yaml

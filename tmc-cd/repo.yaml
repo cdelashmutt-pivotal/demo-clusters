@@ -1,0 +1,12 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  name: roles.grogscave.net
+  namespace: my-ns
+spec:
+  fetch:
+    git:
+      url: https://github.com/cdelashmutt-pivotal/demo-clusters
+      ref: origin/main
+      subPath: packagerepo/packages
+      lfsSkipSmudge: true

@@ -1,0 +1,25 @@
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: external-dns.roles.grogscave.net.1.0.0
+spec:
+  refName: external-dns.roles.grogscave.net
+  version: 1.0.0
+  releaseNotes: |
+        Initial release of the external-dns role
+  template:
+    spec:
+      fetch:
+      - git:
+          url: https://github.com/cdelashmutt-pivotal/demo-clusters
+          ref: origin/main
+          subPath: packages/external-dns
+      template:
+      - ytt: {}
+      - kbld:
+          paths:
+          - ".imgpkg/images.yml"
+          - "-"
+      deploy:
+      - kapp: {}

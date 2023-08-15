@@ -1,0 +1,10 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: external-dns.roles.grogscave.net
+spec:
+  displayName: "External DNS"
+  longDescription: "Manage external DNS services automatically using declarative objects"
+  shortDescription: "Manage External DNS services"
+  categories:
+  - dns
