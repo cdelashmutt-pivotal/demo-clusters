@@ -16,7 +16,10 @@ spec:
           ref: origin/main
           subPath: packages/external-dns
       template:
-      - ytt: {}
+      - ytt:
+          paths:
+          - "upstream"
+          - "overlays"
       - kbld:
           paths:
           - ".imgpkg/images.yml"

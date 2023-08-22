@@ -9,6 +9,6 @@ spec:
     refName: external-dns.roles.grogscave.net
     versionSelection:
       constraints: ">=1.0.0"
-  values:
-  - secretRef:
-      name: external-dns-values
+#  values:
+#  - secretRef:
+#      name: external-dns-values
