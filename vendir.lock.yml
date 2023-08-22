@@ -6,6 +6,6 @@ directories:
       sha: 1f6340a95c0f5a96cc5888196eb767943f96bea4
       tags:
       - v0.13.5
-    path: upstream
-  path: packages/external-dns
+    path: .
+  path: packages/external-dns/upstream
 kind: LockConfig
