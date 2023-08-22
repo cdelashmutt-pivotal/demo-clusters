@@ -49,11 +49,11 @@ spec:
                 subPath: #@ "/clusters/" + data.values.cluster_name
                 ref: origin/main
                 lfsSkipSmudge: true
-            template:
-            - sops:
-                age:
-                  privateKeysSecretRef:
-                    name: age-key
+            #! template:
+            #! - sops:
+            #!     age:
+            #!       privateKeysSecretRef:
+            #!         name: age-key
             - ytt: {}
             - kbld: {}
             deploy:
