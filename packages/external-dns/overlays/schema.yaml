@@ -1,3 +1,12 @@
 #@data/values-schema
 ---
 namespace: external-dns
+#@schema/validation one_of=["aws"]
+provider: aws
+#@schema/validation min_len=1
+domain: ""
+#@schema/validation min_len=1
+owner_id: ""
+aws:
+  #@schema/validation min_len=1, when=lambda _, ctx: hasattr(ctx.root, "aws")
+  role_arn: ""

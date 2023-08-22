@@ -11,3 +11,28 @@ spec:
       - name: external-dns
         #@overlay/replace via=lambda left, right: left+":"+right
         image: v0.13.5
+
+
+#@overlay/match by=overlay.subset({"kind":"Deployment"}),expects=1
+---
+spec:
+  template:
+    spec:
+      containers:
+      #@overlay/match by=overlay.subset({"name":"external-dns"})
+      - name: external-dns
+        args:
+        - --txt-prefix=txt-
+        - --policy=upsert-only
+        - #@ "--txt-owner-id=" + data.values.owner_id
+        - #@ "--domain-filter=" + data.values.domain
+        #@overlay/match by=overlay.subset("--source=ingress")
+        #@overlay/remove
+        - --source=ingress
+        - #@ "--provider=" + data.values.provider
+        #! AWS CONFIG
+        #@ if data.values.provider == "aws":
+        - --aws-zone-type=public
+        - --aws-prefer-cname
+        #@ end
+        #! END AWS CONFIG

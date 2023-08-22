@@ -21,6 +21,21 @@ spec:
         namespace:
           type: string
           default: external-dns
+        provider:
+          type: string
+          default: aws
+          enum:
+          - aws
+        domain:
+          type: string
+        owner_id:
+          type: string
+        aws:
+          type: object
+          properties:
+            role_arn:
+              type: string
+
   template:
     spec:
       fetch:
