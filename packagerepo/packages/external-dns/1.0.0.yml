@@ -8,6 +8,19 @@ spec:
   version: 1.0.0
   releaseNotes: |
         Initial release of the external-dns role
+  includedSoftware:
+  - displayName: external-dns
+    version: v0.13.5
+    description: External DNS
+  valuesSchema:
+    openAPIv3:
+      title: external-dns.roles.grogscave.net.1.0.0 values schema
+      examples:
+      - namespace: external-dns
+      properties:
+        namespace:
+          type: string
+          default: external-dns
   template:
     spec:
       fetch:

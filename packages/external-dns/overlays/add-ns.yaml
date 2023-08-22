@@ -1,6 +1,8 @@
 #@ load("@ytt:overlay", "overlay")
+#@ load("@ytt:data", "data")
+
 #@overlay/match by=overlay.or_op(overlay.subset({"kind":"Deployment"}), overlay.subset({"kind":"ServiceAccount"})),expects=2
 ---
 metadata:
   #@overlay/match missing_ok=True
-  namespace: external-dns
+  namespace: #@ data.values.namespace
