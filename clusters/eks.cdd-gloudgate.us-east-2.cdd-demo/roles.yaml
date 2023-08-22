@@ -1,0 +1,14 @@
+---
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageInstall
+metadata:
+  name: external-dns
+spec:
+  serviceAccountName: tanzu-cd
+  packageRef:
+    refName: external-dns.roles.grogscave.net
+    versionSelection:
+      constraints: ">=1.0.0"
+  values:
+  - secretRef:
+      name: external-dns-values
