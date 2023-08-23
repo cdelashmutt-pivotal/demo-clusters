@@ -1,0 +1,10 @@
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: PackageMetadata
+metadata:
+  name: tap.roles.grogscave.net
+spec:
+  displayName: "TAP Install"
+  longDescription: "Full install of TAP"
+  shortDescription: "TAP - Full"
+  categories:
+  - platform

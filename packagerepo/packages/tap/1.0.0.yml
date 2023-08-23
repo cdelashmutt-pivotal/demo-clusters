@@ -1,0 +1,49 @@
+---
+apiVersion: data.packaging.carvel.dev/v1alpha1
+kind: Package
+metadata:
+  name: tap.roles.grogscave.net.1.0.0
+spec:
+  refName: tap.roles.grogscave.net
+  version: 1.0.0
+  releaseNotes: |
+        Initial release of the TAP role
+  valuesSchema:
+    openAPIv3:
+      title: tap.roles.grogscave.net.1.0.0 values schema
+      properties:
+        tap_install:
+          type: object
+          properties:
+            version:
+              type: object
+              properties:
+                package_repo_bundle_tag:
+                  type: string
+                package_version:
+                  type: string
+            package_repository:
+              type: object
+              properties:
+                oci_repository:
+                  type: string
+            values:
+              type: object        
+
+  template:
+    spec:
+      fetch:
+      - git:
+          url: https://github.com/cdelashmutt-pivotal/demo-clusters
+          ref: origin/main
+          subPath: packages/external-dns
+      template:
+      - ytt:
+          paths:
+          - "config"
+      - kbld:
+          paths:
+          - ".imgpkg/images.yml"
+          - "-"
+      deploy:
+      - kapp: {}
