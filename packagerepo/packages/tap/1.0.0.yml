@@ -36,7 +36,7 @@ spec:
       - git:
           url: https://github.com/cdelashmutt-pivotal/demo-clusters
           ref: origin/main
-          subPath: packages/external-dns
+          subPath: packages/tap
       template:
       - ytt:
           paths:
