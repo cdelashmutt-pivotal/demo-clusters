@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tap-sensitive-values
+  namespace: tanzu-continuousdelivery-resources
+type: Opaque
+stringData:
+  values.yaml: |
+    tap_install:
+      sensitive_values:
