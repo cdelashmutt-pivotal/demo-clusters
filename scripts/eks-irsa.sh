@@ -1,8 +1,9 @@
 #!/bin/bash
 
 cluster_name=$1
-service_name=$2
-service_namespace=$3
+service_namespace=$2
+service_name=$3
+
 
 oidc_provider=$(aws eks describe-cluster --name cdd-demo --query "cluster.identity.oidc.issuer" --output text)
 oidc_provider=${oidc_provider/#https\:\/\/}

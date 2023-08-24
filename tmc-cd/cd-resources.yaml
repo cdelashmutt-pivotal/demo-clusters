@@ -50,6 +50,10 @@ spec:
                 ref: origin/main
                 lfsSkipSmudge: true
             template:
+            - sops:
+                age:
+                  privateKeySecretRef:
+                    name: age-key
             - ytt: {}
             - kbld: {}
             deploy:
