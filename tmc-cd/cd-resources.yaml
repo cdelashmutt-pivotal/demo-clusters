@@ -140,7 +140,7 @@ spec:
             template:
             - sops:
                 age:
-                  privateKeySecretRef:
+                  privateKeysSecretRef:
                     name: age-key
             - ytt: {}
             - kbld: {}
