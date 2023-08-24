@@ -112,13 +112,11 @@ spec:
             secretStoreRef:
               name: aws-secretsmanager
               kind: SecretStore
-            target:
-              name: age-key
-              creationPolicy: Owner
             data:
             - secretKey: key.txt
               remoteRef:
-                key: "age-key"
+                key: age
+                property: age_key
 
         cluster-app.yaml: |
           #@ load("@ytt:data", "data")
