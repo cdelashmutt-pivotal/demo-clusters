@@ -40,6 +40,8 @@ spec:
           metadata:
             name: external-secrets
             namespace: tanzu-continuousdelivery-resources
+          annotations:
+            kapp.k14s.io/change-group: eso-hrepo
           spec:
             interval: 5m0s
             url: https://charts.external-secrets.io
@@ -49,6 +51,10 @@ spec:
           metadata:
             name: external-secrets
             namespace: tanzu-continuousdelivery-resources
+          annotations:
+            kapp.k14s.io/change-group: eso-hrelease
+            kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrepo"
+            kapp.k14s.io/change-rule.1: "delete before deleting eso-hrepo"
           spec:
             interval: 1m
             chart:
@@ -64,6 +70,56 @@ spec:
               crds: CreateReplace
             upgrade:
               crds: CreateReplace
+          ---
+          apiVersion: v1
+          kind: ServiceAccount
+          metadata:
+            annotations:
+              eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/team-a
+            name: eso-aws
+            namespace: tanzu-continuousdelivery-resources
+          ---
+          apiVersion: external-secrets.io/v1beta1
+          kind: SecretStore
+          metadata:
+            name: aws-secretsmanager
+            namespace: tanzu-continuousdelivery-resources
+          annotations:
+            kapp.k14s.io/change-group: eso-secretstore
+            kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrelease"
+            kapp.k14s.io/change-rule.1: "delete before deleting eso-hrelease"
+          spec:
+            provider:
+              aws:
+                service: SecretsManager
+                region: us-east-2
+                auth:
+                  jwt:
+                    serviceAccountRef:
+                      name: eso-aws
+          ---
+          apiVersion: external-secrets.io/v1beta1
+          kind: ExternalSecret
+          metadata:
+            name: age-key
+            namespace: tanzu-continuousdelivery-resources
+          annotations:
+            kapp.k14s.io/change-group: eso-externalsecret
+            kapp.k14s.io/change-rule.0: "upsert after upserting eso-secretstore"
+            kapp.k14s.io/change-rule.1: "delete before deleting eso-secretstore"
+          spec:
+            refreshInterval: 1h
+            secretStoreRef:
+              name: aws-secretsmanager
+              kind: SecretStore
+            target:
+              name: age-key
+              creationPolicy: Owner
+            data:
+            - secretKey: key.txt
+              remoteRef:
+                key: "age-key"
+
         cluster-app.yaml: |
           #@ load("@ytt:data", "data")
           ---
@@ -72,6 +128,9 @@ spec:
           metadata:
             name: tmc-cd
             namespace: tanzu-continuousdelivery-resources
+          annotations:
+            kapp.k14s.io/change-rule.0: "upsert after upserting eso-externalsecret"
+            kapp.k14s.io/change-rule.1: "delete before deleting eso-externalsecret"
           spec:
             serviceAccountName: tanzu-cd
             fetch:
