@@ -10,7 +10,4 @@ metadata:
 spec:
   fetch:
     imgpkgBundle:
-      image: #@ data.values.tap_install.package_repository.oci_repository
-      tagSelection:
-        semver:
-          constraints: #@ data.values.tap_install.version.package_repo_bundle_tag
+      image: #@ "{}:{}".format(data.values.tap_install.package_repository.oci_repository, data.values.tap_install.version.package_repo_bundle_tag)
