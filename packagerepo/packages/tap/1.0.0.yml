@@ -41,9 +41,5 @@ spec:
       - ytt:
           paths:
           - "config"
-      - kbld:
-          paths:
-          - ".imgpkg/images.yml"
-          - "-"
       deploy:
       - kapp: {}
