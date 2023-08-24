@@ -14,7 +14,152 @@ stringData:
       package_repository:
         oci_repository: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
       values:
-        profile: full
+        installed_for_vmware_internal_use: "true"
+        excluded_packages:
+          - learningcenter.tanzu.vmware.com
+          - workshops.learningcenter.tanzu.vmware.com
+        ceip_policy_disclosed: true
+        shared:
+          ingress_domain: "aws-work.grogscave.net"
+          ingress_issuer: ""
+          image_registry:
+            project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
+          kubernetes_version: "1.25.9"
+        supply_chain: testing_scanning
+
+        appsso:
+          domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+          default_workload_domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
+
+        ootb_supply_chain_testing_scanning:
+          gitops:
+            server_address: https://github.com
+            repository_owner: cdelashmutt-pivotal
+            repository_name: cdd-demo-gitops
+            commit_strategy: pull_request
+            pull_request:
+              server_kind: github
+              commit_branch: supply_chain
+              pull_request_title: Delivery from Supply Chain
+              pull_request_body: This is a candidate release for promotion
+
+        local_source_proxy:
+          repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
+          push_secret:
+            name: kp-default-repository-secret
+            namespace: build-service
+            create_export: false
+
+        accelerator:
+          ingress:
+            include: true
+            enable_tls: true
+          tls:
+            namespace: default
+            secret_name: default-cert
+
+        appliveview_connector:
+          activateAppLiveViewSecureAccessControl: false
+          activateSensitiveOperations: true
+
+        cnrs:
+          default_tls_secret: default/default-cert
+          domain_template: "{{- .Name}}-{{.Namespace -}}.{{.Domain}}"
+          ingress:
+            external:
+              namespace: tanzu-system-ingress
+            internal:
+              namespace: tanzu-system-ingress
+        contour:
+          contour:
+            replicas: 2
+          infrastructure_provider: aws
+          envoy:
+            service:
+              annotations:
+                external-dns.alpha.kubernetes.io/hostname: '*.aws-work.grogscave.net'
+            workload:
+              type: Deployment
+              replicas: 2
+
+        scanning:
+          resources:
+            limits:
+              cpu: "500m"
+              memory: 3Gi
+            requests:
+              cpu: 200m
+              memory: 1Gi
+              
+        tap_gui:
+          service_type: ClusterIP
+          ingressEnabled: "true"
+          tls:
+            namespace: default
+            secretName: default-cert
+          app_config:
+            app:
+              baseUrl: https://tap-gui.aws-work.grogscave.net
+            auth:
+              environment: development
+            catalog:
+              locations:
+                - type: url
+                  target: https://github.com/cdelashmutt-pivotal/demo-clusters-tap/blob/main/clusters/cdd-demo-aws/backstage-catalog/catalog-info.yaml
+                - type: url
+                  target: https://github.com/tsalm-vmware/spring-cloud-demo-tap/blob/main/tap/catalog/catalog-info.yaml
+                - type: url
+                  target: https://github.com/cdelashmutt-pivotal/java-rest-service/blob/main/catalog/catalog-info.yaml
+                - type: url
+                  target: https://github.com/cdelashmutt-pivotal/weatherforecast-steeltoe/blob/main/catalog/catalog-info.yaml
+                - type: url
+                  target: https://github.com/cdelashmutt-pivotal/appsso-starter-java/blob/main/catalog/catalog-info.yaml
+            kubernetes:                                                                                                                                                                                                                                   
+              serviceLocatorMethod:                                                                                                                                                                                                                       
+                type: multiTenant                                                                                                                                                                                                                         
+              clusterLocatorMethods:                                                                                                                                                                                                                      
+              - type: config                                                                                                                                                                                                                              
+                clusters:                                                                                                                                                                                                                                 
+                - url: https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}                                                                                                                                                                      
+                  name: host                                                                                                                                                                                                                              
+                  authProvider: serviceAccount                                                                                                                                                                                                            
+                  serviceAccountToken: ${KUBERNETES_SERVICE_ACCOUNT_TOKEN}                                                                                                                                                                                
+                  skipTLSVerify: true                                                                                                                                                                                                                     
+                  skipMetricsLookup: false  
+            techdocs:
+              builder: 'external'
+              publisher:
+                type: 'awsS3'
+                awsS3:
+                  bucketName: 'cdd-demo-aws-techdocs'
+                  accountId: '537807987484'
+                  region: 'us-east-2'
+        metadata_store:
+          ns_for_export_app_cert: "*"
+          app_service_type: ClusterIP
+        namespace_provisioner:
+          controller: false
+          gitops_install:
+            ref: origin/main
+            subPath: clusters/cdd-demo-aws/namespace-provisioner/namespaces
+            url: https://github.com/cdelashmutt-pivotal/demo-clusters-tap
+          default_parameters:
+            supply_chain_service_account:
+              secrets:
+              - git-auth
+          additional_sources:
+            - git:
+                ref: origin/main
+                subPath: clusters/cdd-demo-aws/namespace-provisioner/testing-scanning-supplychain
+                url: https://github.com/cdelashmutt-pivotal/demo-clusters-tap
+              path: _ytt_lib/testing-scanning-supplychain
+        package_overlays:
+        - name: cert-manager
+          secrets:
+          - name: cert-manager-overlay
+        - name: tap-gui
+          secrets:
+          - name: tap-gui-overlay
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
