@@ -14,7 +14,6 @@ stringData:
       package_repository:
         oci_repository: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
       values:
-        installed_for_vmware_internal_use: "true"
         excluded_packages:
           - learningcenter.tanzu.vmware.com
           - workshops.learningcenter.tanzu.vmware.com
@@ -26,6 +25,9 @@ stringData:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
           kubernetes_version: "1.25.9"
         supply_chain: testing_scanning
+
+        tap_telemetry:
+          installed_for_vmware_internal_use: "true"
 
         appsso:
           domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
