@@ -14,4 +14,4 @@ stringData:
     #@overlay/match-child-defaults missing_ok=True
     metadata:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/cdd-demo-aws-backstage
+        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/cdd-demo-tap-gui-tap-gui
