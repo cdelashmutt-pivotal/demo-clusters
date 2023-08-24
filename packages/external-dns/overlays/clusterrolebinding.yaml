@@ -1,0 +1,8 @@
+#@ load("@ytt:data","data")
+#@ load("@ytt:overlay","overlay")
+
+#@overlay/match by=overlay.subset({"kind":"ClusterRoleBinding"}),expects=1
+---
+subjects:
+#@overlay/match by=overlay.subset({"name":"external-dns"})
+- namespace: #@ data.values.namespace
