@@ -17,6 +17,9 @@ kind: PackageInstall
 metadata:
   name: external-dns
   namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert before upserting tap"
+    kapp.k14s.io/change-rule.1: "delete after deleting tap"
 spec:
   serviceAccountName: tanzu-cd
   packageRef:

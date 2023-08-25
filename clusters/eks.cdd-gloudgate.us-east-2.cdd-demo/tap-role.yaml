@@ -169,6 +169,8 @@ kind: PackageInstall
 metadata:
   name: tap
   namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-group: tap
 spec:
   serviceAccountName: tanzu-cd
   packageRef:
