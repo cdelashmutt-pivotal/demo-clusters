@@ -18,6 +18,7 @@ stringData:
           - learningcenter.tanzu.vmware.com
           - workshops.learningcenter.tanzu.vmware.com
           - fluxcd.source.controller.tanzu.vmware.com
+          - grype.scanning.apps.tanzu.vmware.com
         ceip_policy_disclosed: true
         shared:
           ingress_domain: "aws-work.grogscave.net"
