@@ -40,8 +40,8 @@ spec:
           metadata:
             name: external-secrets
             namespace: tanzu-continuousdelivery-resources
-          annotations:
-            kapp.k14s.io/change-group: eso-hrepo
+            annotations:
+              kapp.k14s.io/change-group: eso-hrepo
           spec:
             interval: 5m0s
             url: https://charts.external-secrets.io
@@ -51,10 +51,10 @@ spec:
           metadata:
             name: external-secrets
             namespace: tanzu-continuousdelivery-resources
-          annotations:
-            kapp.k14s.io/change-group: eso-hrelease
-            kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrepo"
-            kapp.k14s.io/change-rule.1: "delete before deleting eso-hrepo"
+            annotations:
+              kapp.k14s.io/change-group: eso-hrelease
+              kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrepo"
+              kapp.k14s.io/change-rule.1: "delete before deleting eso-hrepo"
           spec:
             interval: 1m
             chart:
@@ -84,10 +84,10 @@ spec:
           metadata:
             name: aws-secretsmanager
             namespace: tanzu-continuousdelivery-resources
-          annotations:
-            kapp.k14s.io/change-group: eso-secretstore
-            kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrelease"
-            kapp.k14s.io/change-rule.1: "delete before deleting eso-hrelease"
+            annotations:
+              kapp.k14s.io/change-group: eso-secretstore
+              kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrelease"
+              kapp.k14s.io/change-rule.1: "delete before deleting eso-hrelease"
           spec:
             provider:
               aws:
@@ -103,10 +103,10 @@ spec:
           metadata:
             name: age-key
             namespace: tanzu-continuousdelivery-resources
-          annotations:
-            kapp.k14s.io/change-group: eso-externalsecret
-            kapp.k14s.io/change-rule.0: "upsert after upserting eso-secretstore"
-            kapp.k14s.io/change-rule.1: "delete before deleting eso-secretstore"
+            annotations:
+              kapp.k14s.io/change-group: eso-externalsecret
+              kapp.k14s.io/change-rule.0: "upsert after upserting eso-secretstore"
+              kapp.k14s.io/change-rule.1: "delete before deleting eso-secretstore"
           spec:
             refreshInterval: 1h
             secretStoreRef:
@@ -126,9 +126,9 @@ spec:
           metadata:
             name: tmc-cd
             namespace: tanzu-continuousdelivery-resources
-          annotations:
-            kapp.k14s.io/change-rule.0: "upsert after upserting eso-externalsecret"
-            kapp.k14s.io/change-rule.1: "delete before deleting eso-externalsecret"
+            annotations:
+              kapp.k14s.io/change-rule.0: "upsert after upserting eso-externalsecret"
+              kapp.k14s.io/change-rule.1: "delete before deleting eso-externalsecret"
           spec:
             serviceAccountName: tanzu-cd
             fetch:
