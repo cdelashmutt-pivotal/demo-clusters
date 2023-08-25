@@ -1,12 +1,60 @@
 ---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: clusterissuers.cert-manager.io
+  annotations:
+    kapp.k14s.io/change-group: certmanager-crd
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-rule: "upsert after upserting pkgi"
+spec:
+  scope: Cluster
+  group: cert-manager.io
+  versions:
+    - name: v1
+  names:
+    kind: ClusterIssuer
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: certificates.cert-manager.io
+  annotations:
+    kapp.k14s.io/change-group: certmanager-crd
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-rule: "upsert after upserting pkgi"
+spec:
+  scope: Namespaced
+  group: cert-manager.io
+  versions:
+    - name: v1
+  names:
+    kind: Certificate
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: tlscertificatedelegations.projectcontour.io
+  annotations:
+    kapp.k14s.io/change-group: contour-crd
+    kapp.k14s.io/exists: ""
+    kapp.k14s.io/change-rule: "upsert after upserting pkgi"
+spec:
+  scope: Namespaced
+  group: projectcontour.io
+  versions:
+    - name: v1
+  names:
+    kind: TLSCertificateDelegation
+---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-contour-cluster-issuer
   annotations:
     kapp.k14s.io/change-group: issuer
-    kapp.k14s.io/change-rule.0: "upsert after upserting pkgi"
-    kapp.k14s.io/change-rule.1: "delete before deleting pkgi"
+    kapp.k14s.io/change-rule.0: "upsert after upserting certmanager-crd"
+    kapp.k14s.io/change-rule.1: "delete before deleting certmanager-crd"
 spec:
   acme:
     email: cdelashmutt@vmware.com
@@ -66,6 +114,8 @@ metadata:
   annotations:
     kapp.k14s.io/change-rule.0: "upsert after upserting cert"
     kapp.k14s.io/change-rule.1: "delete before deleting cert"
+    kapp.k14s.io/change-rule.2: "upsert after upserting contour-crd"
+    kapp.k14s.io/change-rule.3: "delete before deleting contour-crd"
 spec:
   delegations:
   - secretName: default-cert
