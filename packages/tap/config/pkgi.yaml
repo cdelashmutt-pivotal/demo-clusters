@@ -13,6 +13,7 @@ stringData:
     ---
     metadata:
       annotations:
+        #@overlay/match missing_ok=True
         kapp.k14s.io/change-rule.order1: "upsert after upserting scancontroller"
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
