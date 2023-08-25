@@ -1,5 +1,20 @@
 #@ load("@ytt:data", "data")
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tap-overlay
+  namespace: tap-install
+type: Opaque
+stringData:
+  order-namespace-provisioner.yaml: |
+    #@ load("@ytt/overlay", "overlay")
+    #@ overlay/match by=overlay.subset({"kind": "PackageInstall", "metadata": {"name": "namespace-provisioner"}
+    ---
+    metadata:
+      annotations:
+        kapp.k14s.io/change-rule.order1: "upsert after upserting scancontroller"
+---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
 metadata:
@@ -9,6 +24,7 @@ metadata:
     kapp.k14s.io/change-group: pkgi
     kapp.k14s.io/change-rule.0: "upsert after upserting pkgr"
     kapp.k14s.io/change-rule.1: "delete before deleting pkgr"
+    ext.packaging.carvel.dev/ytt-paths-from-secret-name.0: tap-overlay
 spec:
   serviceAccountName: tap-installer-sa
   packageRef:
