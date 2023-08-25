@@ -79,6 +79,21 @@ spec:
             name: eso-aws
             namespace: tanzu-continuousdelivery-resources
           ---
+          apiVersion: apiextensions.k8s.io/v1
+          kind: CustomResourceDefinition
+          metadata:
+            name: secretstores.external-secrets.io
+            annotations:
+              kapp.k14s.io/change-group: secretstore-crd
+              kapp.k14s.io/exists: ""
+              kapp.k14s.io/change-rule: "upsert after upserting eso-hrelease"
+          spec:
+            group: external-secrets.io
+            versions:
+              - name: v1beta1
+            names:
+              kind: SecretStore
+          ---
           apiVersion: external-secrets.io/v1beta1
           kind: SecretStore
           metadata:
@@ -86,8 +101,8 @@ spec:
             namespace: tanzu-continuousdelivery-resources
             annotations:
               kapp.k14s.io/change-group: eso-secretstore
-              kapp.k14s.io/change-rule.0: "upsert after upserting eso-hrelease"
-              kapp.k14s.io/change-rule.1: "delete before deleting eso-hrelease"
+              kapp.k14s.io/change-rule.0: "upsert after upserting secretstore-crd"
+              kapp.k14s.io/change-rule.1: "delete before deleting secretstore-crd"
           spec:
             provider:
               aws:
