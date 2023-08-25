@@ -88,6 +88,7 @@ spec:
               kapp.k14s.io/exists: ""
               kapp.k14s.io/change-rule: "upsert after upserting eso-hrelease"
           spec:
+            scope: Namespaced
             group: external-secrets.io
             versions:
               - name: v1beta1
@@ -103,6 +104,7 @@ spec:
               kapp.k14s.io/exists: ""
               kapp.k14s.io/change-rule: "upsert after upserting eso-hrelease"
           spec:
+            scope: Namespaced
             group: external-secrets.io
             versions:
               - name: v1beta1
