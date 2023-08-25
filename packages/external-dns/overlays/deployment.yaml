@@ -23,7 +23,7 @@ spec:
       - name: external-dns
         args:
         - --txt-prefix=txt-
-        - --policy=upsert-only
+        - --policy=sync
         - #@ "--txt-owner-id=" + data.values.owner_id
         - #@ "--domain-filter=" + data.values.domain
         #@overlay/match by=overlay.subset("--source=ingress")
