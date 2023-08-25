@@ -9,7 +9,7 @@ type: Opaque
 stringData:
   order-namespace-provisioner.yaml: |
     #@ load("@ytt/overlay", "overlay")
-    #@ overlay/match by=overlay.subset({"kind": "PackageInstall", "metadata": {"name": "namespace-provisioner"}
+    #@ overlay/match by=overlay.subset({"kind": "PackageInstall", "metadata": {"name": "namespace-provisioner"})
     ---
     metadata:
       annotations:
