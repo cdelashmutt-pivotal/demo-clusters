@@ -3,6 +3,10 @@ kind: Secret
 metadata:
   name: external-dns-values
   namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-group: "external-dns-config"
+    kapp.k14s.io/change-rule.0: "upsert before upserting external-dns-pkgi"
+    kapp.k14s.io/change-rule.1: "delete after deleting external-dns-pkgi"
 type: Opaque
 stringData:
   values.yaml: |
@@ -18,6 +22,7 @@ metadata:
   name: external-dns
   namespace: tanzu-continuousdelivery-resources
   annotations:
+    kapp.k14s.io/change-group: "external-dns-pkgi"
     kapp.k14s.io/change-rule.0: "upsert before upserting tap"
     kapp.k14s.io/change-rule.1: "delete after deleting tap"
 spec:

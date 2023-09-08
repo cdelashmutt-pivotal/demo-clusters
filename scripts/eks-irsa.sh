@@ -1,8 +1,9 @@
 #!/bin/bash
 
-cluster_name=$1
-service_namespace=$2
-service_name=$3
+operation=$1
+cluster_name=$2
+service_namespace=$3
+service_name=$4
 
 
 oidc_provider=$(aws eks describe-cluster --name cdd-demo --query "cluster.identity.oidc.issuer" --output text)
@@ -15,7 +16,8 @@ policy_arn=$(aws iam list-policies --query "Policies[?PolicyName=='$service_name
 eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve
 
 role_name=$cluster_name-$service_namespace-$service_name
-aws iam create-role --role-name $role_name --no-cli-pager --assume-role-policy-document file://<(cat << EOF
+if [ "create" == $operation ]; then
+    aws iam create-role --role-name $role_name --no-cli-pager --assume-role-policy-document file://<(cat << EOF
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -37,4 +39,8 @@ aws iam create-role --role-name $role_name --no-cli-pager --assume-role-policy-d
 EOF
 )
 
-aws iam attach-role-policy --role-name $role_name --policy-arn arn:aws:iam::${account_id}:policy/$service_name
+    aws iam attach-role-policy --role-name $role_name --policy-arn arn:aws:iam::${account_id}:policy/$service_name
+elif [ "delete" == $operation ]; then
+    aws iam detach-role-policy --role-name $role_name --policy-arn arn:aws:iam::${account_id}:policy/$service_name
+    aws iam delete-role --role-name $role_name
+fi
