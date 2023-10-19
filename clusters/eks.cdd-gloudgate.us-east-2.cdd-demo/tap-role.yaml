@@ -13,8 +13,8 @@ stringData:
   values.yaml: |
     tap_install:
       version:
-        package_repo_bundle_tag: "1.7.0-build.84"
-        package_version: "1.7.0-build.84"
+        package_repo_bundle_tag: "1.7.0-rc.8"
+        package_version: "1.7.0-rc.8"
       values:
         shared:
           ingress_domain: "aws-work.grogscave.net"
