@@ -59,6 +59,7 @@ echo "Status: $current_status"
 jq -r '.status.conditions[] | .type + if .message then ": "+.message else ""  end' <<< $current_status_json
 echo "------"
 
+export AWS_REGION=$region
 $SCRIPT_DIR/eks-irsa.sh create $1 external-dns external-dns
 $SCRIPT_DIR/eks-irsa.sh create $1 cert-manager cert-manager
 $SCRIPT_DIR/eks-irsa.sh create $1 tanzu-continuousdelivery-resources eso-aws
