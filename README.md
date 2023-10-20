@@ -44,12 +44,11 @@ EOF
 
 This repository uses SOPS with `age` to read secrets that you encrypt and check in to your repo.  You will need to generate and import and `age` key to be distributed to your clusters.  If you need to generate a key, you can use the following command:
 ```console
-$ age-keygen -o key.txt
+$ age-keygen -o ~/.age/key.txt
 ```
 
-TODO: Install external-secrets as a Helm release with TMC.
-
-TODO: Add SecretStore config package.
+Next, create a secret in AWS for your key:
+aws secretsmanager create-secret age --secret-string "$(echo "{\"age_key\":\"$(cat ~/.age/key.txt | sed ':a;N;$!ba;s/\n/\\n/g')")"
 
 Now, under the "clusters" path of this repo, add in directories cooresponding to the names of the clusters registed in TMC that you want to apply config to.
 

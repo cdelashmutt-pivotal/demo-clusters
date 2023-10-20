@@ -121,13 +121,13 @@ tap_install:
       controller: false
       gitops_install:
         ref: origin/main
-        subPath: clusters/cdd-demo-aws/namespace-provisioner/namespaces
-        url: https://github.com/cdelashmutt-pivotal/demo-clusters-tap
+        subPath: namespace-provisioner/cdd-demo/namespaces
+        url: https://github.com/cdelashmutt-pivotal/demo-clusters
       additional_sources:
         - git:
             ref: origin/main
-            subPath: clusters/cdd-demo-aws/namespace-provisioner/testing-scanning-supplychain
-            url: https://github.com/cdelashmutt-pivotal/demo-clusters-tap
+            subPath: namespace-provisioner/cdd-demo/namespaces
+            url: https://github.com/cdelashmutt-pivotal/demo-clusters
           path: _ytt_lib/testing-scanning-supplychain
     package_overlays:
     - name: cert-manager
