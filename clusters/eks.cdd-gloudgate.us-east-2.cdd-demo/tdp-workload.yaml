@@ -7,6 +7,9 @@ metadata:
     apps.tanzu.vmware.com/workload-type: web
     apps.tanzu.vmware.com/has-tests: "true"
     app.kubernetes.io/part-of: tdp-configurator
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap"
+    kapp.k14s.io/change-rule.1: "delete before deleting tap"
 spec:
   build:
     env:
