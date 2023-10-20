@@ -126,7 +126,7 @@ tap_install:
       additional_sources:
         - git:
             ref: origin/main
-            subPath: namespace-provisioner/cdd-demo/namespaces
+            subPath: namespace-provisioner/cdd-demo/testing-scanning-supplychain
             url: https://github.com/cdelashmutt-pivotal/demo-clusters
           path: _ytt_lib/testing-scanning-supplychain
     package_overlays:
