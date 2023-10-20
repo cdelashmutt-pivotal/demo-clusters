@@ -40,13 +40,11 @@ stringData:
         package_overlays:
         - name: tap-gui
           secrets:
+          - name: tap-gui-overlay
           - name: tdp-app-image-overlay-secret
         - name: cert-manager
           secrets:
           - name: cert-manager-overlay
-        - name: tap-gui
-          secrets:
-          - name: tap-gui-overlay
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
