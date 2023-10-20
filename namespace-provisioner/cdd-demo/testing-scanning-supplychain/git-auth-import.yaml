@@ -6,4 +6,4 @@ metadata:
   annotations:
       tekton.dev/git-0: https://github.com
 spec:
-  fromNamespace: tap-install
+  fromNamespace: tanzu-continuousdelivery-resources
