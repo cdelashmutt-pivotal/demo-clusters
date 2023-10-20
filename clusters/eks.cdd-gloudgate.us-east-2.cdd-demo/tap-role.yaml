@@ -32,6 +32,10 @@ stringData:
           app_config:
             auth:
               environment: development
+            grafana:
+              domain: https://grafana.aws-work.grogscave.net # URL of your Grafana domain
+              unifiedAlerting: true
+
         namespace_provisioner:
           default_parameters:
             supply_chain_service_account:
