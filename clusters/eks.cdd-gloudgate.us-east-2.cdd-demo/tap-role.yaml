@@ -32,6 +32,8 @@ stringData:
           app_config:
             auth:
               environment: development
+            customize:
+              default_route: /home
             grafana:
               domain: https://grafana.aws-work.grogscave.net # URL of your Grafana domain
               unifiedAlerting: true
