@@ -20,7 +20,7 @@ stringData:
           ingress_domain: "aws-work.grogscave.net"
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
-          kubernetes_version: "1.27"
+          kubernetes_version: "1.26"
         local_source_proxy:
           repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
         contour:
