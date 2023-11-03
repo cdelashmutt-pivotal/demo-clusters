@@ -1,28 +1,28 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: tdp-app-image-overlay-secret
-  namespace: tap-install
-stringData:
-  tdp-app-image-overlay.yaml: |
-    #@ load("@ytt:overlay", "overlay")
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: tdp-app-image-overlay-secret
+#   namespace: tap-install
+# stringData:
+#   tdp-app-image-overlay.yaml: |
+#     #@ load("@ytt:overlay", "overlay")
 
-    #! makes an assumption that tap-gui is deployed in the namespace: "tap-gui"
-    #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "server", "namespace": "tap-gui"}}), expects="1+"
-    ---
-    spec:
-      template:
-        spec:
-          containers:
-            #@overlay/match by=overlay.subset({"name": "backstage"}),expects="1+"
-            #@overlay/match-child-defaults missing_ok=True
-            - image: gcr.io/pa-cdelashmutt/cdd-demo-tap/workloads/tdp-configurator-tdp@sha256:c62f9e4da5f2a9e9797dcbd0a2904ad3ca6afa5c59fc70b3142dc497cb163617
-            #@overlay/replace
-              args:
-              - -c
-              - |
-                export KUBERNETES_SERVICE_ACCOUNT_TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
-                exec /layers/tanzu-buildpacks_node-engine-lite/node/bin/node portal/dist/packages/backend  \
-                --config=portal/app-config.yaml \
-                --config=portal/runtime-config.yaml \
-                --config=/etc/app-config/app-config.yaml
+#     #! makes an assumption that tap-gui is deployed in the namespace: "tap-gui"
+#     #@overlay/match by=overlay.subset({"kind": "Deployment", "metadata": {"name": "server", "namespace": "tap-gui"}}), expects="1+"
+#     ---
+#     spec:
+#       template:
+#         spec:
+#           containers:
+#             #@overlay/match by=overlay.subset({"name": "backstage"}),expects="1+"
+#             #@overlay/match-child-defaults missing_ok=True
+#             - image: gcr.io/pa-cdelashmutt/cdd-demo-tap/workloads/tdp-configurator-tdp@sha256:c62f9e4da5f2a9e9797dcbd0a2904ad3ca6afa5c59fc70b3142dc497cb163617
+#             #@overlay/replace
+#               args:
+#               - -c
+#               - |
+#                 export KUBERNETES_SERVICE_ACCOUNT_TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
+#                 exec /layers/tanzu-buildpacks_node-engine-lite/node/bin/node portal/dist/packages/backend  \
+#                 --config=portal/app-config.yaml \
+#                 --config=portal/runtime-config.yaml \
+#                 --config=/etc/app-config/app-config.yaml
