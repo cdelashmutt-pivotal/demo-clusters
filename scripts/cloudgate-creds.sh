@@ -13,7 +13,7 @@ CG_ACCOUNTS_JSON=$(curl -s --location --request GET 'https://api.console.cloudga
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $CG_ACCESS_TOKEN")
 
-CG_RESOURCE_PATH=$(jq -r '.data[]| select(.name == "US1920102 WORLDWIDE SALES cdelashmutt") | .resourcePath' <<< "$CG_ACCOUNTS_JSON")
+CG_RESOURCE_PATH=$(jq -r '.data[]| select(.name == "'"$CG_ACCOUNT_NAME"'") | .resourcePath' <<< "$CG_ACCOUNTS_JSON")
 
 echo $CG_MASTER_ACCOUNT_ID
 echo $CG_ORG_ACCOUNT_ID
