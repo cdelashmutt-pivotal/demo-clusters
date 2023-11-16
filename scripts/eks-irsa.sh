@@ -6,7 +6,7 @@ service_namespace=$3
 service_name=$4
 
 
-oidc_provider=$(aws eks describe-cluster --name cdd-demo --query "cluster.identity.oidc.issuer" --output text)
+oidc_provider=$(aws eks describe-cluster --name $cluster_name --query "cluster.identity.oidc.issuer" --output text)
 oidc_provider=${oidc_provider/#https\:\/\/}
 
 account_id=$(aws sts get-caller-identity --query "Account" --output text)
