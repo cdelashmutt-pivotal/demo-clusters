@@ -17,7 +17,7 @@ stringData:
         package_version: "1.7.0"
       values:
         shared:
-          ingress_domain: "aws-work.grogscave.net"
+          ingress_domain: "iterate.aws-work.grogscave.net"
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
           kubernetes_version: "1.26"
@@ -27,7 +27,7 @@ stringData:
           envoy:
             service:
               annotations:
-                external-dns.alpha.kubernetes.io/hostname: '*.aws-work.grogscave.net'
+                external-dns.alpha.kubernetes.io/hostname: '*.iterate.aws-work.grogscave.net'
         tap_gui:
           app_config:
             auth:
@@ -35,7 +35,7 @@ stringData:
             customize:
               default_route: /home
             grafana:
-              domain: https://grafana.aws-work.grogscave.net # URL of your Grafana domain
+              domain: https://grafana.iterate.aws-work.grogscave.net # URL of your Grafana domain
               unifiedAlerting: true
 
         namespace_provisioner:

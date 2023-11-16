@@ -77,9 +77,9 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting issuer"
     kapp.k14s.io/change-rule.1: "delete before deleting issuer"
 spec:
-  commonName: "*.aws-work.grogscave.net"
+  commonName: "*.iterate.aws-work.grogscave.net"
   dnsNames:
-  - "*.aws-work.grogscave.net"
+  - "*.iterate.aws-work.grogscave.net"
   duration: 2160h0m0s
   issuerRef:
     kind: ClusterIssuer

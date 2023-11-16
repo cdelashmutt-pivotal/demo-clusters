@@ -10,7 +10,7 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    domain: "aws-work.grogscave.net"
+    domain: "iterate.aws-work.grogscave.net"
     owner_id: "cdd-demo"
     aws:
       role_arn: "arn:aws:iam::537807987484:role/cdd-demo-external-dns-external-dns"
