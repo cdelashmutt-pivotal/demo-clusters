@@ -76,7 +76,7 @@ spec:
           kind: ServiceAccount
           metadata:
             annotations:
-              eks.amazonaws.com/role-arn: #@ "arn:aws:iam::537807987484:role/" + data.values.cluster_name + "-tanzu-continuousdelivery-resources-eso-aws"
+              eks.amazonaws.com/role-arn: #@ "arn:aws:iam::537807987484:role/" + data.values.cluster_name.rsplit(".",1)[1] + "-tanzu-continuousdelivery-resources-eso-aws"
             name: eso-aws
             namespace: tanzu-continuousdelivery-resources
           ---
