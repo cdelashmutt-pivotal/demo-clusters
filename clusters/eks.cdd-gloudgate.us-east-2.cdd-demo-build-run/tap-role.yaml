@@ -16,9 +16,8 @@ stringData:
         package_repo_bundle_tag: "1.7.0"
         package_version: "1.7.0"
       values:
-        profile: iterate
         shared:
-          ingress_domain: "iterate.aws-work.grogscave.net"
+          ingress_domain: "run.aws-work.grogscave.net"
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
           kubernetes_version: "1.27"
@@ -28,7 +27,7 @@ stringData:
           envoy:
             service:
               annotations:
-                external-dns.alpha.kubernetes.io/hostname: '*.iterate.aws-work.grogscave.net'
+                external-dns.alpha.kubernetes.io/hostname: '*.run.aws-work.grogscave.net'
         tap_gui:
           app_config:
             auth:
@@ -36,7 +35,7 @@ stringData:
             customize:
               default_route: /home
             grafana:
-              domain: https://grafana.iterate.aws-work.grogscave.net # URL of your Grafana domain
+              domain: https://grafana.run.aws-work.grogscave.net # URL of your Grafana domain
               unifiedAlerting: true
 
         namespace_provisioner:
@@ -44,7 +43,14 @@ stringData:
             supply_chain_service_account:
               secrets:
               - git-auth
-
+        package_overlays:
+        - name: tap-gui
+          secrets:
+          - name: tap-gui-overlay
+          - name: tdp-app-image-overlay-secret
+        - name: cert-manager
+          secrets:
+          - name: cert-manager-overlay
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall

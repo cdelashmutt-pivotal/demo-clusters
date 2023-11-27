@@ -1,0 +1,9 @@
+---
+apiVersion: secretgen.carvel.dev/v1alpha1
+kind: SecretExport
+metadata:
+  name: kp-default-repository-secret
+  namespace: build-service
+spec:
+  toNamespaces:
+  - "*"

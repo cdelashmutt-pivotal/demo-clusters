@@ -16,7 +16,7 @@ LoggingAuthenticator: false
 LoggingControllerManager: false
 LoggingScheduler: false
 ControlplaneRoleArn: arn:aws:iam::537807987484:role/control-plane.4811654495416222692.eks.tmc.cloud.vmware.com
-Version: 1.26
+Version: 1.27
 EnablePrivateAccess: true
 EnablePublicAccess: true
 PublicAccessCidrs: 0.0.0.0/0
