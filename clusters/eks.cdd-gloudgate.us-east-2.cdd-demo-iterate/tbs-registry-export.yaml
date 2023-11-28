@@ -1,11 +1,10 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: build-service
 ---
 apiVersion: secretgen.carvel.dev/v1alpha1
 kind: SecretExport
 metadata:
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap"
+    kapp.k14s.io/change-rule.1: "delete before deleting tap"
   name: kp-default-repository-secret
   namespace: build-service
 spec:
