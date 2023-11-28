@@ -1,4 +1,11 @@
 apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    kapp.k14s.io/exists: ""
+  name: tap-install
+---
+apiVersion: v1
 kind: Secret
 metadata:
   name: tdp-app-image-overlay-secret
