@@ -29,18 +29,6 @@ tap_install:
       domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
       default_workload_domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
 
-    ootb_supply_chain_testing_scanning:
-      gitops:
-        server_address: https://github.com
-        repository_owner: cdelashmutt-pivotal
-        repository_name: cdd-demo-gitops
-        commit_strategy: pull_request
-        pull_request:
-          server_kind: github
-          commit_branch: supply_chain
-          pull_request_title: Delivery from Supply Chain
-          pull_request_body: This is a candidate release for promotion
-
     local_source_proxy:
       repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
       push_secret:
@@ -80,40 +68,6 @@ tap_install:
           type: Deployment
           replicas: 2
 
-    scanning:
-      resources:
-        limits:
-          cpu: "500m"
-          memory: 3Gi
-        requests:
-          cpu: 200m
-          memory: 1Gi
-          
-    tap_gui:
-      tls:
-        namespace: default
-        secretName: default-cert
-      app_config:
-        catalog:
-          locations:
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/demo-clusters-tap/blob/main/clusters/cdd-demo-aws/backstage-catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/tsalm-vmware/spring-cloud-demo-tap/blob/main/tap/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/java-rest-service/blob/main/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/weatherforecast-steeltoe/blob/main/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/appsso-starter-java/blob/main/catalog/catalog-info.yaml
-        techdocs:
-          builder: 'external'
-          publisher:
-            type: 'awsS3'
-            awsS3:
-              bucketName: 'cdd-demo-aws-techdocs'
-              accountId: '537807987484'
-              region: 'us-east-2'
     metadata_store:
       ns_for_export_app_cert: "*"
       app_service_type: ClusterIP
@@ -133,6 +87,3 @@ tap_install:
     - name: cert-manager
       secrets:
       - name: cert-manager-overlay
-    - name: tap-gui
-      secrets:
-      - name: tap-gui-overlay
