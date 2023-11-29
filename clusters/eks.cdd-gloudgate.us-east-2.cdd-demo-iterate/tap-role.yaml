@@ -31,7 +31,7 @@ stringData:
           push_secret:
             name: "registry-credentials"
             namespace: "tanzu-continuousdelivery-resources"
-            create_export: false
+            create_export: true
         contour:
           envoy:
             service:
