@@ -22,7 +22,7 @@ stringData:
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
           kubernetes_version: "1.27"
-          supply_chain: basic
+        supply_chain: basic
         local_source_proxy:
           repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
         contour:
