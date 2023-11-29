@@ -24,7 +24,6 @@ stringData:
             secret:
               name: "registry-credentials"
               namespace: "tanzu-continuousdelivery-resources"
-              create_export: false
           kubernetes_version: "1.27"
         supply_chain: basic
         local_source_proxy:
