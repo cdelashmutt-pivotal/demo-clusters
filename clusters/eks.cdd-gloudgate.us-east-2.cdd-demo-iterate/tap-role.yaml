@@ -33,6 +33,11 @@ stringData:
               name: "local-source-proxy-credentials"
               namespace: "tanzu-continuousdelivery-resources"
               create_export: true
+          pull_secret:
+            secret:
+              name: "local-source-proxy-credentials"
+              namespace: "tanzu-continuousdelivery-resources"
+              create_export: false
         contour:
           envoy:
             service:
