@@ -31,10 +31,6 @@ tap_install:
 
     local_source_proxy:
       repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
-      push_secret:
-        name: kp-default-repository-secret
-        namespace: build-service
-        create_export: false
 
     accelerator:
       ingress:
