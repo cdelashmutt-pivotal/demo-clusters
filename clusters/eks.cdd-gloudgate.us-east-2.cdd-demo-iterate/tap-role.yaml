@@ -29,15 +29,9 @@ stringData:
         local_source_proxy:
           repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
           push_secret:
-            secret:
-              name: "local-source-proxy-credentials"
-              namespace: "tanzu-continuousdelivery-resources"
-              create_export: true
-          pull_secret:
-            secret:
-              name: "local-source-proxy-credentials"
-              namespace: "tanzu-continuousdelivery-resources"
-              create_export: false
+            name: "local-source-proxy-credentials"
+            namespace: "tanzu-continuousdelivery-resources"
+            create_export: true
         contour:
           envoy:
             service:
