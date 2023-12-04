@@ -21,17 +21,10 @@ stringData:
           ingress_domain: "iterate.aws-work.grogscave.net"
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
-            secret:
-              name: "registry-credentials"
-              namespace: "tanzu-continuousdelivery-resources"
           kubernetes_version: "1.27"
         supply_chain: basic
         local_source_proxy:
           repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
-          push_secret:
-            name: "local-source-proxy-credentials"
-            namespace: "tanzu-continuousdelivery-resources"
-            create_export: true
         contour:
           envoy:
             service:
