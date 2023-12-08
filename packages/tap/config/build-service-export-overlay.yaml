@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: build-service-export-overlay
+  namespace: tap-install
+  annotations:
+    kapp.k14s.io/change-rule.0: "upsert before upserting pkgi"
+    kapp.k14s.io/change-rule.1: "delete after deleting pkgi"
+
+type: Opaque
+stringData:
+  overlay.yaml: |
+    #@ load("@ytt:overlay", "overlay")
+    #@ load("@ytt:data", "data")
+    #@overlay/match by=overlay.subset({"kind": "SecretExport", "metadata": {"name": "registry-credentials"}})
+    ---
+    #@overlay/match missing_ok=True
+    #@overlay/match-child-defaults missing_ok=True
+    spec:
+      toNamespaces:
+      - kpack
+      - build-service
+      - tap-local-source-system
