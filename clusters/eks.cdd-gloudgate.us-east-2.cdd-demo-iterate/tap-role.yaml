@@ -21,9 +21,6 @@ stringData:
           ingress_domain: "iterate.aws-work.grogscave.net"
           image_registry:
             project_path: "gcr.io/pa-cdelashmutt/cdd-demo-iterate"
-            secret:
-              name: registry-credentials
-              namespace: tanzu-continuousdelivery-resources
           kubernetes_version: "1.27"
         supply_chain: basic
         contour:
