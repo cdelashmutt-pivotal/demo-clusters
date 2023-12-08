@@ -29,9 +29,6 @@ tap_install:
       domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
       default_workload_domain_template: "{{.Name}}-{{.Namespace}}.{{.Domain}}"
 
-    local_source_proxy:
-      repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
-
     accelerator:
       ingress:
         include: true
