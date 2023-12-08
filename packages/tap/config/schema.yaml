@@ -80,6 +80,6 @@ tap_install:
     - name: cert-manager
       secrets:
       - name: cert-manager-overlay
-    - name: build-service-export
+    - name: build-service
       secrets:
       - name: build-service-export-overlay
