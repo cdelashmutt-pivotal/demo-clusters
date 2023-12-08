@@ -76,9 +76,9 @@ tap_install:
       additional_sources:
         - git:
             ref: origin/main
-            subPath: namespace-provisioner/cdd-demo/testing-scanning-supplychain
+            subPath: namespace-provisioner/cdd-demo/supplychain-resources
             url: https://github.com/cdelashmutt-pivotal/demo-clusters
-          path: _ytt_lib/testing-scanning-supplychain
+          path: _ytt_lib/supplychain-resources
     package_overlays:
     - name: cert-manager
       secrets:
