@@ -35,6 +35,7 @@ stringData:
           push_secret:
             name: local-source-proxy-credentials
             namespace: tanzu-continuousdelivery-resources
+            create_export: true
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
