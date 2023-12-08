@@ -31,6 +31,12 @@ stringData:
             service:
               annotations:
                 external-dns.alpha.kubernetes.io/hostname: '*.iterate.aws-work.grogscave.net'
+        
+        buildservice:
+          kp_default_repository_secret:
+            name: registry-credentials
+            namespace: tanzu-continuousdelivery-resources
+
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
