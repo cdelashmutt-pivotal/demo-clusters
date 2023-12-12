@@ -32,17 +32,12 @@ stringData:
               name: registry-credentials
               namespace: tanzu-continuousdelivery-resources
           kubernetes_version: "1.27"
-        supply_chain: basic
+        supply_chain: testing_scanning
         contour:
           envoy:
             service:
               annotations:
                 external-dns.alpha.kubernetes.io/hostname: '*.build-run.aws-work.grogscave.net'
-        local_source_proxy:
-          push_secret:
-            name: local-source-proxy-credentials
-            namespace: tanzu-continuousdelivery-resources
-            create_export: true
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
