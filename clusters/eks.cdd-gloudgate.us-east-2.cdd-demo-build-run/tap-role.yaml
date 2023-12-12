@@ -23,6 +23,7 @@ stringData:
         excluded_packages:
         - local-source-proxy.apps.tanzu.vmware.com
         - developer-conventions.tanzu.vmware.com
+        - fluxcd.source.controller.tanzu.vmware.com
         shared:
           ingress_domain: "build-run.aws-work.grogscave.net"
           image_registry:
