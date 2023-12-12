@@ -38,6 +38,10 @@ stringData:
             service:
               annotations:
                 external-dns.alpha.kubernetes.io/hostname: '*.build-run.aws-work.grogscave.net'
+        tap_gui:
+          tls:
+            namespace: default
+            secretName: default-cert
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
