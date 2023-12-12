@@ -17,7 +17,7 @@ stringData:
       version:
         package_repo_bundle_tag: "1.7.1"
         package_version: "1.7.1"
-      cluster_name: (@= data.values.tap_install.cluster_name @)
+      cluster_name: (@= data.values.cluster_name @)
       values:
         profile: iterate
         shared:
