@@ -175,7 +175,10 @@ spec:
                 age:
                   privateKeysSecretRef:
                     name: age-key
-            - ytt: {}
+            - ytt:
+                valuesFrom:
+                - secretRef: 
+                    name: cluster-name-secret
             - kbld: {}
             deploy:
             - kapp: {}

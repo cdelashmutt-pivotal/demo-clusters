@@ -13,89 +13,29 @@ stringData:
   values.yaml: |
     tap_install:
       version:
-        package_repo_bundle_tag: "1.7.0"
-        package_version: "1.7.0"
+        package_repo_bundle_tag: "1.7.1"
+        package_version: "1.7.1"
       values:
+        profile: iterate
         shared:
-          ingress_domain: "run.aws-work.grogscave.net"
+          ingress_domain: "build-run.aws-work.grogscave.net"
           image_registry:
-            project_path: "gcr.io/pa-cdelashmutt/cdd-demo-tap/supply-chain"
+            project_path: "gcr.io/pa-cdelashmutt/cdd-demo-build-run"
+            secret:
+              name: registry-credentials
+              namespace: tanzu-continuousdelivery-resources
           kubernetes_version: "1.27"
-        local_source_proxy:
-          repository: gcr.io/pa-cdelashmutt/cdd-demo-tap/source
+        supply_chain: basic
         contour:
           envoy:
             service:
               annotations:
-                external-dns.alpha.kubernetes.io/hostname: '*.run.aws-work.grogscave.net'
-
-    ootb_supply_chain_testing_scanning:
-      gitops:
-        server_address: https://github.com
-        repository_owner: cdelashmutt-pivotal
-        repository_name: cdd-demo-gitops
-        commit_strategy: pull_request
-        pull_request:
-          server_kind: github
-          commit_branch: supply_chain
-          pull_request_title: Delivery from Supply Chain
-          pull_request_body: This is a candidate release for promotion
-
-    scanning:
-      resources:
-        limits:
-          cpu: "500m"
-          memory: 3Gi
-        requests:
-          cpu: 200m
-          memory: 1Gi
-          
-    tap_gui:
-      tls:
-        namespace: default
-        secretName: default-cert
-      app_config:
-        auth:
-          environment: development
-        customize:
-          default_route: /home
-        grafana:
-          domain: https://grafana.run.aws-work.grogscave.net # URL of your Grafana domain
-          unifiedAlerting: true
-        catalog:
-          locations:
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/demo-clusters-tap/blob/main/clusters/cdd-demo-aws/backstage-catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/tsalm-vmware/spring-cloud-demo-tap/blob/main/tap/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/java-rest-service/blob/main/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/weatherforecast-steeltoe/blob/main/catalog/catalog-info.yaml
-            - type: url
-              target: https://github.com/cdelashmutt-pivotal/appsso-starter-java/blob/main/catalog/catalog-info.yaml
-        techdocs:
-          builder: 'external'
-          publisher:
-            type: 'awsS3'
-            awsS3:
-              bucketName: 'cdd-demo-aws-techdocs'
-              accountId: '537807987484'
-              region: 'us-east-2'
-
-        namespace_provisioner:
-          default_parameters:
-            supply_chain_service_account:
-              secrets:
-              - git-auth
-        package_overlays:
-        - name: tap-gui
-          secrets:
-          - name: tap-gui-overlay
-          - name: tdp-app-image-overlay-secret
-        - name: cert-manager
-          secrets:
-          - name: cert-manager-overlay
+                external-dns.alpha.kubernetes.io/hostname: '*.build-run.aws-work.grogscave.net'
+        local_source_proxy:
+          push_secret:
+            name: local-source-proxy-credentials
+            namespace: tanzu-continuousdelivery-resources
+            create_export: true
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall

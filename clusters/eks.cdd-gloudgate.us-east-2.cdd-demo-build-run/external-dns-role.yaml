@@ -10,10 +10,10 @@ metadata:
 type: Opaque
 stringData:
   values.yaml: |
-    domain: "iterate.aws-work.grogscave.net"
-    owner_id: "cdd-demo"
+    domain: "aws-work.grogscave.net"
+    owner_id: "cdd-demo-build-run"
     aws:
-      role_arn: "arn:aws:iam::537807987484:role/cdd-demo-external-dns-external-dns"
+      role_arn: "arn:aws:iam::537807987484:role/cdd-demo-build-run-external-dns-external-dns"
 
 ---
 apiVersion: packaging.carvel.dev/v1alpha1

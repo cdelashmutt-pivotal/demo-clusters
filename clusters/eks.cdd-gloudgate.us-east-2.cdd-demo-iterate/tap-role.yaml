@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 ---
 apiVersion: v1
 kind: Secret
@@ -10,11 +11,13 @@ metadata:
     kapp.k14s.io/change-rule.1: "delete after deleting tap"
 type: Opaque
 stringData:
+  #@yaml/text-templated-strings
   values.yaml: |
     tap_install:
       version:
         package_repo_bundle_tag: "1.7.1"
         package_version: "1.7.1"
+      cluster_name: (@= data.values.tap_install.cluster_name @)
       values:
         profile: iterate
         shared:

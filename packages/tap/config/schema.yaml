@@ -7,6 +7,7 @@ tap_install:
     package_version: "1.6.2"
   package_repository:
     oci_repository: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages
+  cluster_name: ""
   #@schema/type any=True
   values:
     excluded_packages:

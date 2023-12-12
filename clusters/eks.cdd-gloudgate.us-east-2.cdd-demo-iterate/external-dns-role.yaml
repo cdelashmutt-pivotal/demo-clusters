@@ -11,7 +11,7 @@ type: Opaque
 stringData:
   values.yaml: |
     domain: "aws-work.grogscave.net"
-    owner_id: "cdd-demo"
+    owner_id: "cdd-demo-iterate"
     aws:
       role_arn: "arn:aws:iam::537807987484:role/cdd-demo-iterate-external-dns-external-dns"
 

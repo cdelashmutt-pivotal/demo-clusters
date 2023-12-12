@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 ---
 apiVersion: v1
 kind: Secret
@@ -10,6 +11,7 @@ metadata:
 
 type: Opaque
 stringData:
+  #@yaml/text-templated-strings
   overlay.yaml: |
     #@ load("@ytt:overlay", "overlay")
     #@ load("@ytt:data", "data")
@@ -19,4 +21,4 @@ stringData:
     #@overlay/match-child-defaults missing_ok=True
     metadata:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/cdd-demo-cert-manager-cert-manager
+        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/(@-= data.values.cluster_name -@)-cert-manager-cert-manager
