@@ -1,3 +1,4 @@
+#@ load("@ytt:data", "data")
 ---
 apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
@@ -77,9 +78,9 @@ metadata:
     kapp.k14s.io/change-rule.0: "upsert after upserting issuer"
     kapp.k14s.io/change-rule.1: "delete before deleting issuer"
 spec:
-  commonName: "*.iterate.aws-work.grogscave.net"
+  commonName: #@ "*.{}".format(data.values.tap_install.values.shared.ingress_domain)
   dnsNames:
-  - "*.iterate.aws-work.grogscave.net"
+  - #@ "*.{}".format(data.values.tap_install.values.shared.ingress_domain)
   duration: 2160h0m0s
   issuerRef:
     kind: ClusterIssuer
