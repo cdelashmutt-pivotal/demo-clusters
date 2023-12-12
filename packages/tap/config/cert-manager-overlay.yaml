@@ -21,4 +21,4 @@ stringData:
     #@overlay/match-child-defaults missing_ok=True
     metadata:
       annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/(@-= data.values.cluster_name -@)-cert-manager-cert-manager
+        eks.amazonaws.com/role-arn: arn:aws:iam::537807987484:role/(@-= data.values.tap_install.cluster_name -@)-cert-manager-cert-manager
