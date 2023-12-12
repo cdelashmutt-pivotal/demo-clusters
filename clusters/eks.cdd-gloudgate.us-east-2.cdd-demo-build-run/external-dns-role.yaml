@@ -14,7 +14,6 @@ stringData:
     owner_id: "cdd-demo-build-run"
     aws:
       role_arn: "arn:aws:iam::537807987484:role/cdd-demo-build-run-external-dns-external-dns"
-
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall

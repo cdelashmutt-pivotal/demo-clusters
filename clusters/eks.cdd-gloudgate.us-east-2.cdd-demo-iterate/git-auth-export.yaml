@@ -1,9 +1,0 @@
----
-apiVersion: secretgen.carvel.dev/v1alpha1
-kind: SecretExport
-metadata:
-  name: git-auth
-  namespace: tanzu-continuousdelivery-resources
-spec:
-  toNamespaces:
-  - "*"
