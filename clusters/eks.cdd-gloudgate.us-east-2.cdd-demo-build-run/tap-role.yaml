@@ -43,9 +43,9 @@ stringData:
             namespace: default
             secretName: default-cert
           metadataStoreAutoconfiguration: true
-            app_config:
-              auth:
-                environment: default
+          app_config:
+            auth:
+              environment: default
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
