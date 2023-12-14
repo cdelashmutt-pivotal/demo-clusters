@@ -1,5 +1,5 @@
 #@ load("@ytt:data", "data")
-#@ if(hasattr(data.values.tap_install, "tap_gui_image") and data.values.tap_install.tap_gui_image != ""):
+#@ if/end hasattr(data.values.tap_install, "tap_gui_image") and data.values.tap_install.tap_gui_image != "":
 ---
 apiVersion: v1
 kind: Secret
