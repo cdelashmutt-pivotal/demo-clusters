@@ -8,6 +8,7 @@ metadata:
   namespace: tap-install
 type: Opaque
 stringData:
+  #@yaml/text-templated-strings
   tdp-app-image-overlay.yaml: |
     #@ load("@ytt:overlay", "overlay")
 
