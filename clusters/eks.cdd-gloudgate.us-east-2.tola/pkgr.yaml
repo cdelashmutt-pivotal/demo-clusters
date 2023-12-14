@@ -1,0 +1,10 @@
+apiVersion: packaging.carvel.dev/v1alpha1
+kind: PackageRepository
+metadata:
+  name: tanzu-data-services-repository
+  namespace: postgres-tanzu-operator
+spec:
+  fetch:
+    imgpkgBundle: 
+      image: registry.tanzu.vmware.com/packages-for-vmware-tanzu-data-services/tds-packages
+      tagSelection: ">=1.12.0"
