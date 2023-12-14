@@ -11,7 +11,7 @@ spec:
     params:
     - default: default
       name: serviceAccount
-    - default: TDP-IMAGE-LOCATION
+    - default: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages@sha256:29f978561d7d931c9a118c167eae905ce41990131013339aaff10c291ac6c42b
       name: tdp_configurator_bundle
     templateRef:
       kind: ClusterSourceTemplate
@@ -23,8 +23,8 @@ spec:
     - name: registry
       default:
         ca_cert_data: ""
-        repository: IMAGE-REPOSITORY
-        server: REGISTRY-HOSTNAME
+        repository: pa-cdelashmutt/cdd-demo-build-run
+        server: gcr.io
     - default: default
       name: clusterBuilder
     sources:
