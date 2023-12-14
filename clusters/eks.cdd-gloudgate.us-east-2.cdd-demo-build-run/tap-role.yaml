@@ -18,6 +18,7 @@ stringData:
         package_repo_bundle_tag: "1.7.1"
         package_version: "1.7.1"
       cluster_name: (@= data.values.cluster_name.rsplit(".",1)[1] @)
+      tap_gui_image: gcr.io/pa-cdelashmutt/cdd-demo-build-run/tdp-configurator-tdp@sha256:42fa5e3528787eba2bfd04336f739d3435c7dc6c44f9795226aea5aca05ec3fd
       values:
         profile: full
         excluded_packages:
@@ -46,6 +47,14 @@ stringData:
           app_config:
             auth:
               environment: default
+        package_overlays:
+        - name: tap-gui
+          secrets:
+          - name: tdp-app-image-overlay-secret
+          - name: tap-gui-overlay
+        - name: cert-manager
+          secrets:
+          - name: cert-manager-overlay
 ---
 apiVersion: packaging.carvel.dev/v1alpha1
 kind: PackageInstall
