@@ -7,4 +7,6 @@ spec:
   fetch:
     imgpkgBundle: 
       image: registry.tanzu.vmware.com/packages-for-vmware-tanzu-data-services/tds-packages
-      tagSelection: ">=1.12.0"
+      tagSelection: 
+        semver: 
+          constraints: ">=1.12.0"
