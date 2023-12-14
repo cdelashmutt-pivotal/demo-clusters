@@ -1,0 +1,7 @@
+---
+apiVersion: kbld.k14s.io/v1alpha1
+kind: Config
+overrides:
+- image: registry.tanzu.vmware.com/packages-for-vmware-tanzu-data-services/tds-packages:1.12.0
+  newImage: registry.tanzu.vmware.com/packages-for-vmware-tanzu-data-services/tds-packages:1.12.0
+  preresolved: true
