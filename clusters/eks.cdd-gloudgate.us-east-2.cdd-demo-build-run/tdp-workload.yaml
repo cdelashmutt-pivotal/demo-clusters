@@ -11,13 +11,5 @@ metadata:
 spec:
   build:
     env:
-      - name: BP_NODE_RUN_SCRIPTS
-        value: 'set-tpb-config,portal:pack'
-      - name: TPB_CONFIG
-        value: /tmp/tpb-config.yaml
       - name: TPB_CONFIG_STRING
         value: IyB0ZHAtY29uZmlnLnlhbWwKCmFwcDoKICBwbHVnaW5zOgogICAgLSBuYW1lOiAnQHZtd2FyZS10YW56dS90ZHAtcGx1Z2luLXRlY2hpbnNpZ2h0cycKICAgICAgdmVyc2lvbjogJzAuMC4yJwogICAgLSBuYW1lOiAnQHZtd2FyZS10YW56dS90ZHAtcGx1Z2luLWhvbWUnCiAgICAgIHZlcnNpb246ICcwLjAuMicKICAgIC0gbmFtZTogJ0B2bXdhcmUtdGFuenUvdGRwLXBsdWdpbi1zdGFjay1vdmVyZmxvdycKICAgICAgdmVyc2lvbjogJzAuMC4yJwogICAgLSBuYW1lOiAnQHZtd2FyZS10YW56dS90ZHAtcGx1Z2luLXByb21ldGhldXMnCiAgICAgIHZlcnNpb246ICcwLjAuMicKICAgIC0gbmFtZTogJ0B2bXdhcmUtdGFuenUvdGRwLXBsdWdpbi1iYWNrc3RhZ2UtZ3JhZmFuYScKICAgICAgdmVyc2lvbjogJzAuMC4yJwpiYWNrZW5kOgogIHBsdWdpbnM6CiAgICAtIG5hbWU6ICdAdm13YXJlLXRhbnp1L3RkcC1wbHVnaW4tdGVjaGluc2lnaHRzLWJhY2tlbmQnCiAgICAgIHZlcnNpb246ICcwLjAuMicK
-
-  source:
-    image: registry.tanzu.vmware.com/tanzu-application-platform/tap-packages@sha256:bea2f5bec5c5102e2a69a4c5047fae3d51f29741911cf5bb588893aa4e03ca27
-    subPath: builder
