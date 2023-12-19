@@ -10,8 +10,8 @@ metadata:
   name: tap-gui-viewer
   annotations:
     kapp.k14s.io/change-group: "tap-gui-sa"
-    kapp.k14s.io/change-rule.0: "upsert before upserting tap"
-    kapp.k14s.io/change-rule.1: "delete after deleting tap"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap"
+    kapp.k14s.io/change-rule.1: "delete before deleting tap"
 ---
 apiVersion: v1
 kind: Secret
@@ -20,8 +20,8 @@ metadata:
   namespace: tap-gui
   annotations:
     kubernetes.io/service-account.name: tap-gui-viewer
-    kapp.k14s.io/change-rule.0: "upsert before upserting tap-gui-sa"
-    kapp.k14s.io/change-rule.1: "delete after deleting tap-gui-sa"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap-gui-sa"
+    kapp.k14s.io/change-rule.1: "delete before deleting tap-gui-sa"
 type: kubernetes.io/service-account-token
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -29,8 +29,8 @@ kind: ClusterRoleBinding
 metadata:
   name: tap-gui-read-k8s
   annotations:
-    kapp.k14s.io/change-rule.0: "upsert before upserting tap-gui-sa"
-    kapp.k14s.io/change-rule.1: "delete after deleting tap-gui-sa"
+    kapp.k14s.io/change-rule.0: "upsert after upserting tap-gui-sa"
+    kapp.k14s.io/change-rule.1: "delete before deleting tap-gui-sa"
 subjects:
 - kind: ServiceAccount
   namespace: tap-gui
