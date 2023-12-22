@@ -3,17 +3,23 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-group: tanzu-cd-rbac
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: tanzu-cd
   namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-group: tanzu-cd-rbac
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: tanzu-cd
+  annotations:
+    kapp.k14s.io/change-group: tanzu-cd-rbac
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -28,6 +34,9 @@ kind: App
 metadata:
   name: tmc-cd-bootstrap
   namespace: tanzu-continuousdelivery-resources
+  annotations:
+    kapp.k14s.io/change-rule.0: upsert after upserting tanzu-cd-rbac
+    kapp.k14s.io/change-rule.1: delete before deleting tanzu-cd-rbac
 spec:
   serviceAccountName: tanzu-cd
   fetch:
